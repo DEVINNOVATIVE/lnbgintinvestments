@@ -1,19 +1,44 @@
 'use client';
 
 import { useState } from 'react';
-import { Mail, Phone, Clock, MapPin, Send, CheckCircle2, User, MessageSquare } from 'lucide-react';
+import { Mail, Phone, Clock, MapPin, Send, CheckCircle2, User, MessageSquare, Loader2, AlertCircle } from 'lucide-react';
+
+const EMPTY_FORM = { name: '', email: '', phone: '', message: '' };
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
+  const [form, setForm] = useState(EMPTY_FORM);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setForm({ name: '', email: '', phone: '', message: '' });
-    }, 4000);
+    if (sending) return;
+
+    setSending(true);
+    setError('');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Something went wrong. Please try again.');
+      }
+
+      setForm(EMPTY_FORM);
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 6000);
+    } catch (err) {
+      setError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setSending(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -88,6 +113,12 @@ export default function Contact() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  {error && (
+                    <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700">
+                      <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                      <span>{error}</span>
+                    </div>
+                  )}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-medium text-slate-700 mb-1.5">Name</label>
@@ -99,8 +130,9 @@ export default function Contact() {
                           required
                           value={form.name}
                           onChange={handleChange}
+                          disabled={sending}
                           placeholder="Your full name"
-                          className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition"
+                          className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition disabled:opacity-60"
                         />
                       </div>
                     </div>
@@ -114,8 +146,9 @@ export default function Contact() {
                           required
                           value={form.email}
                           onChange={handleChange}
+                          disabled={sending}
                           placeholder="you@example.com"
-                          className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition"
+                          className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition disabled:opacity-60"
                         />
                       </div>
                     </div>
@@ -128,8 +161,9 @@ export default function Contact() {
                       required
                       value={form.phone}
                       onChange={handleChange}
+                      disabled={sending}
                       placeholder="Your phone number"
-                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition"
+                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition disabled:opacity-60"
                     />
                   </div>
                   <div>
@@ -142,17 +176,28 @@ export default function Contact() {
                         rows={5}
                         value={form.message}
                         onChange={handleChange}
+                        disabled={sending}
                         placeholder="Tell us about your Project*..."
-                        className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition resize-none"
+                        className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition resize-none disabled:opacity-60"
                       />
                     </div>
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3.5 rounded-xl font-semibold hover:shadow-glow hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2"
+                    disabled={sending}
+                    className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-3.5 rounded-xl font-semibold hover:shadow-glow hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
                   >
-                    Send Message
-                    <Send className="w-4 h-4" />
+                    {sending ? (
+                      <>
+                        Sending...
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      </>
+                    ) : (
+                      <>
+                        Send Message
+                        <Send className="w-4 h-4" />
+                      </>
+                    )}
                   </button>
                 </form>
               )}
