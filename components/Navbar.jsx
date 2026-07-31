@@ -11,7 +11,7 @@ import { Menu, X, Mail, Phone, Clock, ChevronRight } from 'lucide-react';
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
-  { label: 'Services', href: '/services' },
+  { label: 'Services', href: '/our-services' },
   { label: 'Contact', href: '/contact' },
 ];
 

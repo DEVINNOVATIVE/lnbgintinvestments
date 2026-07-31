@@ -1,6 +1,6 @@
 import Navbar from '@/components/Navbar';
 import PageHero from '@/components/PageHero';
-import Mission from '@/components/Mission';
+import AboutMission from '@/components/AboutMission';
 import StrategicConsulting from '@/components/StrategicConsulting';
 import Services from '@/components/Services';
 import Stats from '@/components/Stats';
@@ -11,12 +11,11 @@ export default function AboutPage() {
   return (
     <>
       <Navbar />
-      <PageHero title="About Us" subtitle="Who We Are" />
-      <Mission />
+      <PageHero title="About Us - LNBG INT INVESTMENTS" subtitle="Who We Are" />
+      <AboutMission />
       <StrategicConsulting />
       <Services />
-      <Stats />
-      <Contact />
+     
       <Footer />
     </>
   );
