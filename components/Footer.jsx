@@ -11,15 +11,7 @@ import {
   MapPin, 
   ChevronRight 
 } from 'lucide-react';
-
-const quickLinks = [
-  { label: 'Commodity Investments', href: '/services' },
-  { label: 'Bond Market', href: '/services' },
-  { label: 'Global Services', href: '/services' },
-  { label: 'Real Estate Investment', href: '/services' },
-  { label: 'Markets Research', href: '/services' },
-];
-
+import { footerQuickLinks } from '@/lib/serviceData';
 export default function Footer() {
   return (
     <footer className="bg-[#0B1426] text-slate-300 relative overflow-hidden">
@@ -109,10 +101,10 @@ export default function Footer() {
             </h3>
 
             <ul className="space-y-3.5 text-sm sm:text-base">
-              {quickLinks.map((link, idx) => (
+              {footerQuickLinks.map((link, idx) => (
                 <li key={idx}>
                   <Link
-                    href={link.href}
+                    href={link.slug ? `/services/${link.slug}` : link.href}
                     className="group inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors duration-200"
                   >
                     <ChevronRight className="w-4 h-4 text-red-600 group-hover:translate-x-1 transition-transform duration-200" />

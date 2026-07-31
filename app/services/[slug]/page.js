@@ -95,13 +95,13 @@ export default function ServiceDetailPage({ params }) {
                             </a>
 
                             {/* Gallery */}
-                            <div className="grid grid-cols-3 gap-4">
+                            <div className="grid grid-cols-2 gap-4">
                                 {service.galleryImages.map((img, i) => (
                                     <div key={i} className="rounded-xl overflow-hidden shadow-card group">
                                         <img
                                             src={img}
                                             alt={`${service.title} gallery ${i + 1}`}
-                                            className="w-full h-36 md:h-44 object-cover group-hover:scale-105 transition-transform duration-500"
+                                            className="w-full h-44 md:h-52 object-cover group-hover:scale-105 transition-transform duration-500"
                                         />
                                     </div>
                                 ))}
@@ -196,18 +196,7 @@ export default function ServiceDetailPage({ params }) {
                                 </ul>
                             </div>
 
-                            {/* Service stats */}
-                            <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-card">
-                                <h4 className="font-bold text-slate-900 mb-4">Key Metrics</h4>
-                                <div className="space-y-4">
-                                    {service.stats.map((stat, i) => (
-                                        <div key={i} className="flex items-center justify-between py-2 border-b border-slate-50 last:border-0">
-                                            <span className="text-slate-500 text-sm">{stat.label}</span>
-                                            <span className="text-red-600 font-bold text-sm">{stat.value}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                       
                         </div>
                     </div>
                 </div>
