@@ -1,36 +1,13 @@
-'use client';
-
 import Link from 'next/link';
-import { Target, BarChart3, Building2, LineChart, ArrowRight } from 'lucide-react';
+import { services } from '@/lib/serviceData';
+import { getServiceIcon } from '@/lib/serviceIcons';
+import { ArrowRight } from 'lucide-react';
 
-const services = [
-  {
-    icon: Target,
-    title: 'Business Strategy',
-    desc: 'Partnering with some of the leading-edge digital companies allows us to expand',
-    featured: true, // Red background by default
-  },
-  {
-    icon: BarChart3,
-    title: 'Asset Management',
-    desc: 'LNBG INT INVESTMENT asset management services are built around portfolio management',
-    featured: false, // Red background by default
-  },
-  {
-    icon: Building2,
-    title: 'Corporate Investments',
-    desc: 'LNBG INT INVESTMENTS aim is to carry out highly selective investments in',
-    featured: false, // White default, turns Red on hover
-  },
-  {
-    icon: LineChart,
-    title: 'Markets Research',
-    desc: 'LNBG INT INVESTMENTS for the past 25 years designed and implemented virtually',
-    featured: false, // White default, turns Red on hover
-  },
-];
+const FEATURED_COUNT = 4;
 
 export default function Services() {
+  const featuredServices = services.slice(0, FEATURED_COUNT);
+
   return (
     <section className="py-8 bg-slate-50/70 relative overflow-hidden">
       {/* Background Decorative Blur Glows */}
@@ -59,14 +36,15 @@ export default function Services() {
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
-          {services.map((service, i) => {
-            const Icon = service.icon;
-            const isDefaultRed = service.featured;
+          {featuredServices.map((service, i) => {
+            const Icon = getServiceIcon(service.iconName);
+            const isDefaultRed = i === 0;
 
             return (
-              <div
-                key={i}
-                className={`group relative p-8 rounded-2xl transition-all duration-500 border flex flex-col justify-between text-center overflow-hidden cursor-pointer ${
+              <Link
+                key={service.slug}
+                href={`/services/${service.slug}`}
+                className={`group relative p-8 rounded-2xl transition-all duration-500 border flex flex-col justify-between text-center overflow-hidden ${
                   isDefaultRed
                     ? 'bg-gradient-to-b from-red-600 via-red-650 to-red-700 border-red-600 text-white shadow-xl shadow-red-600/20 hover:-translate-y-2'
                     : 'bg-white border-slate-100/80 text-slate-900 shadow-lg shadow-slate-200/50 hover:bg-gradient-to-b hover:from-red-600 hover:to-red-700 hover:border-red-600 hover:text-white hover:shadow-xl hover:shadow-red-600/20 hover:-translate-y-2'
@@ -106,18 +84,17 @@ export default function Services() {
 
                   {/* Description */}
                   <p
-                    className={`text-sm leading-relaxed mb-8 transition-colors duration-300 font-normal ${
+                    className={`text-sm leading-relaxed mb-8 transition-colors duration-300 font-normal line-clamp-3 ${
                       isDefaultRed ? 'text-red-50' : 'text-slate-500 group-hover:text-red-100'
                     }`}
                   >
-                    {service.desc}
+                    {service.shortDesc}
                   </p>
                 </div>
 
                 {/* READ MORE CTA */}
                 <div className="relative z-10 pt-2 border-t border-white/10 group-hover:border-white/20">
-                  <Link
-                    href="/services"
+                  <span
                     className={`inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase transition-all duration-300 ${
                       isDefaultRed
                         ? 'text-white group-hover:text-white'
@@ -126,12 +103,23 @@ export default function Services() {
                   >
                     <span>Read More</span>
                     <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
-                  </Link>
+                  </span>
                 </div>
 
-              </div>
+              </Link>
             );
           })}
+        </div>
+
+        {/* View all services */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-slate-200 bg-white text-slate-700 text-sm font-bold tracking-wide shadow-lg shadow-slate-200/50 hover:border-red-600 hover:bg-red-600 hover:text-white hover:shadow-red-600/20 transition-all duration-300 group"
+          >
+            View All Services
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+          </Link>
         </div>
       </div>
     </section>
