@@ -46,20 +46,16 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-              <div className="relative w-10 h-10 lg:w-12 lg:h-12 rounded-xl overflow-hidden border border-white/20 shadow-lg group-hover:scale-105 transition-transform duration-300">
+              <div className="relative w-28 h-11 lg:w-32 lg:h-12 rounded-xl overflow-hidden border border-white/20 shadow-lg bg-white/5 group-hover:scale-105 group-hover:border-red-500/40 transition-all duration-300">
                 <Image
                   src="/assets/logo.png"
                   alt="LNBG Logo"
                   fill
                   quality={100}
                   unoptimized
-                  className="object-contain p-0.5"
+                  className="object-contain p-1"
                   priority
                 />
-              </div>
-              <div className="hidden sm:flex flex-col leading-none">
-                <span className="text-white font-black text-base lg:text-lg tracking-tight">LNBG</span>
-                <span className="text-red-400 text-[10px] font-bold uppercase tracking-[0.2em]">Int. Investments</span>
               </div>
             </Link>
 
@@ -139,14 +135,8 @@ export default function Navbar() {
               className="fixed top-0 right-0 bottom-0 w-[78%] max-w-sm bg-[#070D1B] border-l border-white/10 z-[70] md:hidden flex flex-col"
             >
               <div className="flex items-center justify-between p-5 border-b border-white/10">
-                <div className="flex items-center gap-2.5">
-                  <div className="relative w-10 h-10 rounded-xl overflow-hidden border border-white/20">
-                    <Image src="/assets/logo.png" alt="LNBG Logo" fill quality={100} unoptimized className="object-contain p-0.5" />
-                  </div>
-                  <div className="flex flex-col leading-none">
-                    <span className="text-white font-black text-base tracking-tight">LNBG</span>
-                    <span className="text-red-400 text-[10px] font-bold uppercase tracking-[0.2em]">Int. Investments</span>
-                  </div>
+                <div className="relative w-28 h-11 rounded-xl overflow-hidden border border-white/20 bg-white/5">
+                  <Image src="/assets/logo.png" alt="LNBG Logo" fill quality={100} unoptimized className="object-contain p-1" />
                 </div>
                 <button
                   className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 border border-white/15 text-white hover:bg-white/20 transition-colors"

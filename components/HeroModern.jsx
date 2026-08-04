@@ -57,12 +57,12 @@ export default function HeroModern() {
       </AnimatePresence>
 
       {/* Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#070D1B]/90 via-[#070D1B]/70 to-[#070D1B]/95" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(220,38,38,0.18),transparent_55%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#070D1B]/90 via-[#070D1B]/60 to-[#070D1B]/95" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(220,38,38,0.18),transparent_55%)]" />
       <div className="absolute inset-0 bg-grid-dark opacity-20" />
 
       {/* Centered content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center pt-24 pb-16">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center pt-28 sm:pt-32 pb-10">
         <AnimatePresence mode="wait">
           <motion.div
             key={s.eyebrow}
@@ -84,7 +84,7 @@ export default function HeroModern() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -24 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[1.05] tracking-tight mb-6"
+            className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[1.05] tracking-tight mb-6 drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]"
           >
             {s.title}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-amber-300">
@@ -100,7 +100,7 @@ export default function HeroModern() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-slate-300 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-10"
+            className="text-slate-200 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-10 drop-shadow-[0_1px_12px_rgba(0,0,0,0.5)]"
           >
             {s.desc}
           </motion.p>
@@ -145,7 +145,7 @@ export default function HeroModern() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.4 }}
-        className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-12"
+        className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-10"
       >
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {cards.map((card, idx) => {
@@ -176,7 +176,7 @@ export default function HeroModern() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-1 text-slate-400"
+        className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-1 text-slate-400"
       >
         <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Scroll</span>
         <motion.div
