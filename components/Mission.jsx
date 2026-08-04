@@ -160,7 +160,7 @@ export default function Mission() {
             >
               <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 shadow-lg flex-shrink-0">
                 <Image
-                  src="/assets/founder.png"
+                  src="/assets/founder.jpeg"
                   alt="Lord Neil B Gibson"
                   fill
                   quality={100}
