@@ -42,7 +42,7 @@ export default function ServicesSidebar() {
   return (
     <aside className="lg:col-span-1 space-y-8 sticky top-4">
       {/* Search */}
-      <div>
+      {/* <div>
         <div className="flex gap-0">
           <input
             type="text"
@@ -53,7 +53,7 @@ export default function ServicesSidebar() {
             Search
           </button>
         </div>
-      </div>
+      </div> */}
 
       {/* Category List */}
       <div>
@@ -76,7 +76,7 @@ export default function ServicesSidebar() {
       </div>
 
       {/* Archives */}
-      <div>
+      {/* <div>
         <SectionHeading title="Archives" />
         <ul className="space-y-1">
           {archives.map((arc) => (
@@ -88,10 +88,10 @@ export default function ServicesSidebar() {
             </li>
           ))}
         </ul>
-      </div>
+      </div> */}
 
       {/* Gallery */}
-      <div>
+      {/* <div>
         <SectionHeading title="Gallery" />
         <div className="grid grid-cols-3 gap-1.5">
           {galleryImages.map((img, i) => (
@@ -104,10 +104,10 @@ export default function ServicesSidebar() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Tags */}
-      <div>
+      {/* <div>
         <SectionHeading title="Tags" />
         <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (
@@ -119,7 +119,7 @@ export default function ServicesSidebar() {
             </button>
           ))}
         </div>
-      </div>
+      </div> */}
     </aside>
   );
 }

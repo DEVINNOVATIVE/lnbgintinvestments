@@ -49,14 +49,7 @@ export default function ServicesListing() {
                   </Link>
 
                   <div className="p-6">
-                    <div className="flex items-center gap-4 text-xs text-slate-400 mb-2.5">
-                      <span className="flex items-center gap-1.5">
-                        <User className="w-3.5 h-3.5" /> {service.author}
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <Calendar className="w-3.5 h-3.5" /> {service.date}
-                      </span>
-                    </div>
+                
 
                     <h2 className="text-xl font-bold text-slate-900 mb-2.5 group-hover:text-red-600 transition-colors leading-snug">
                       <Link href={`/services/${service.slug}`}>{service.specialTitle}</Link>

@@ -138,10 +138,13 @@ function Counter({ value }) {
 
 export default function Stats() {
   return (
-    <section className="relative py-20 overflow-hidden bg-[#111d30]">
+    <section className="relative py-20 overflow-hidden ">
       {/* Background ambient lighting for modern depth */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-red-600/5 rounded-full blur-[120px] pointer-events-none" />
 
+  <div className="absolute inset-0 bg-grid-dark opacity-30" />
+      <div className="absolute inset-0 bg-gradient-to-r from-red-700 via-red-800 to-slate-900" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-red-500/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-72 h-72 bg-rose-500/10 rounded-full blur-3xl" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 items-center">
           {stats.map((stat, i) => (
