@@ -46,7 +46,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-              <div className="relative w-28 h-11 lg:w-32 lg:h-12 rounded-xl overflow-hidden border border-white/20 shadow-lg bg-white/5 group-hover:scale-105 group-hover:border-red-500/40 transition-all duration-300">
+              <div className="relative w-28 h-11 lg:w-32 lg:h-12 rounded-xl overflow-hidden shadow-lg bg-white group-hover:scale-105 group-hover:shadow-red-500/20 transition-all duration-300">
                 <Image
                   src="/assets/logo.png"
                   alt="LNBG Logo"
@@ -135,7 +135,7 @@ export default function Navbar() {
               className="fixed top-0 right-0 bottom-0 w-[78%] max-w-sm bg-[#070D1B] border-l border-white/10 z-[70] md:hidden flex flex-col"
             >
               <div className="flex items-center justify-between p-5 border-b border-white/10">
-                <div className="relative w-28 h-11 rounded-xl overflow-hidden border border-white/20 bg-white/5">
+                <div className="relative w-28 h-11 rounded-xl overflow-hidden bg-white shadow-md">
                   <Image src="/assets/logo.png" alt="LNBG Logo" fill quality={100} unoptimized className="object-contain p-1" />
                 </div>
                 <button
