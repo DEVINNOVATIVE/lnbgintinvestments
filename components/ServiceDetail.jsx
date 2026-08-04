@@ -73,7 +73,7 @@ export default function ServiceDetail({ service }) {
             </div>
 
             {/* Prev / Next service navigation */}
-            <div className="flex items-center justify-between mt-10 pt-8 border-t border-slate-100 gap-4">
+            <div className=" items-center hidden md:flex justify-between mt-10 pt-8 border-t border-slate-100 gap-4">
               <Link
                 href={`/services/${prev.slug}`}
                 className="group flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-red-200 hover:bg-white hover:shadow-card transition-all duration-300 flex-1 min-w-0"
