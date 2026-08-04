@@ -130,10 +130,11 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { services } from '@/lib/serviceData';
 import {
   Target, BarChart3, Building2, LineChart, Globe2, TrendingUp, Layers,
-  Home as HomeIcon, ArrowRight, ArrowLeft, ChevronLeft, ChevronRight,
+  Home as HomeIcon, ArrowRight, ChevronLeft, ChevronRight,
 } from 'lucide-react';
 
 const iconMap = { Target, BarChart3, Building2, LineChart, Globe2, TrendingUp, Layers, HomeIcon };
@@ -156,7 +157,6 @@ export default function Services() {
     }
   }, [cardWidth]);
 
-  // Auto-play
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
@@ -169,7 +169,6 @@ export default function Services() {
     return () => clearInterval(interval);
   }, [isPaused, totalDots, scrollToIndex]);
 
-  // Track scroll position to update active dot
   const handleScroll = useCallback(() => {
     if (!scrollRef.current) return;
     const scrollLeft = scrollRef.current.scrollLeft;
@@ -177,13 +176,12 @@ export default function Services() {
     setActiveIndex(Math.max(0, Math.min(idx, totalDots - 1)));
   }, [cardWidth, totalDots]);
 
-  // Measure card width for scroll calculations
   useEffect(() => {
     function measure() {
       if (!scrollRef.current) return;
       const firstCard = scrollRef.current.querySelector('[data-card]');
       if (firstCard) {
-        const width = firstCard.offsetWidth + 24; // card + gap
+        const width = firstCard.offsetWidth + 24;
         setCardWidth(width);
       }
     }
@@ -207,23 +205,28 @@ export default function Services() {
       <div className="absolute inset-0 bg-grid opacity-20" />
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
-        {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-          <div>
-            {/* <div className="inline-flex items-center gap-2 bg-red-100 text-red-600 rounded-full px-4 py-1.5 mb-4">
-              <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse" />
-              <span className="text-xs font-semibold uppercase tracking-widest">What we do</span>
-            </div> */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.55 }}
+          >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight">
               Our <span className="text-gradient">Services</span>
             </h2>
             <p className="text-slate-500 max-w-xl mt-4 text-[15px] leading-relaxed">
               Comprehensive solutions designed to accelerate your business growth across every dimension of modern investment.
             </p>
-          </div>
+          </motion.div>
 
-          {/* Navigation arrows */}
-          <div className="flex items-center gap-3">
+          <motion.div
+            initial={{ opacity: 0, x: 12 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-3"
+          >
             <button
               onClick={handlePrev}
               disabled={activeIndex === 0}
@@ -240,11 +243,10 @@ export default function Services() {
             >
               <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
             </button>
-          </div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Carousel track — full width, scroll-snap */}
       <div
         className="relative z-10 max-w-7xl mx-auto"
         onMouseEnter={() => setIsPaused(true)}
@@ -259,95 +261,66 @@ export default function Services() {
           {services.map((service, i) => {
             const Icon = iconMap[service.iconName] || Target;
             return (
-              <Link
+              <motion.div
                 key={service.slug}
-                href={`/services/${service.slug}`}
-                data-card
-                className="group snap-start flex-shrink-0 w-[300px] sm:w-[340px] md:w-[380px] bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-slate-100 hover:border-red-200 transition-all duration-500 hover:-translate-y-2 block"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: i * 0.06 }}
               >
-                {/* Image */}
-                <div className="relative h-52 overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent" />
+                <Link
+                  href={`/services/${service.slug}`}
+                  data-card
+                  className="group snap-start flex-shrink-0 w-[300px] sm:w-[340px] md:w-[380px] bg-white rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-slate-100 hover:border-red-200 transition-all duration-500 hover:-translate-y-2 block"
+                >
+                  <div className="relative h-52 overflow-hidden">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent" />
 
-                  {/* Icon badge */}
-                  <div className="absolute top-4 right-4 w-12 h-12 bg-white/90 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-red-600 transition-colors duration-300">
-                    <Icon className="w-6 h-6 text-red-600 group-hover:text-white transition-colors duration-300" />
+                    <div className="absolute top-4 right-4 w-12 h-12 bg-white/90 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-red-600 transition-colors duration-300">
+                      <Icon className="w-6 h-6 text-red-600 group-hover:text-white transition-colors duration-300" />
+                    </div>
+
+                    <div className="absolute bottom-4 left-4 flex gap-1.5">
+                      {service.categories.slice(0, 2).map((cat) => (
+                        <span key={cat} className="px-2.5 py-1 bg-white/20 backdrop-blur-md text-white text-[10px] font-semibold rounded-full uppercase tracking-wide">
+                          {cat}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
-                  {/* Category tag */}
-                  <div className="absolute bottom-4 left-4 flex gap-1.5">
-                    {service.categories.slice(0, 2).map((cat) => (
-                      <span key={cat} className="px-2.5 py-1 bg-white/20 backdrop-blur-md text-white text-[10px] font-semibold rounded-full uppercase tracking-wide">
-                        {cat}
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-red-600 transition-colors duration-300">
+                      {service.title}
+                    </h3>
+                    <p className="text-slate-500 text-sm leading-relaxed mb-5 line-clamp-3">
+                      {service.shortDesc}
+                    </p>
+
+                    <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                      <span className="text-xs text-slate-400 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 bg-green-500 rounded-full" />
+                        {service.date}
                       </span>
-                    ))}
+                      <span className="inline-flex items-center gap-1.5 text-red-600 text-xs font-semibold group-hover:gap-2.5 transition-all">
+                        Read More
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-red-600 transition-colors duration-300">
-                    {service.title}
-                  </h3>
-                  <p className="text-slate-500 text-sm leading-relaxed mb-5 line-clamp-3">
-                    {service.shortDesc}
-                  </p>
-
-                  {/* Footer row */}
-                  <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                    <span className="text-xs text-slate-400 flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full" />
-                      {service.date}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 text-red-600 text-xs font-semibold group-hover:gap-2.5 transition-all">
-                      Read More
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
-                  </div>
-                </div>
-
-                {/* Hover gradient bar */}
-                <div className="h-1 bg-gradient-to-r from-red-600 to-rose-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-              </Link>
+                  <div className="h-1 bg-gradient-to-r from-red-600 to-rose-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                </Link>
+              </motion.div>
             );
           })}
-
-          {/* End spacer */}
-          <div className="flex-shrink-0 w-4" />
-        </div>
-
-        {/* Progress dots */}
-        <div className="flex items-center justify-center gap-2 mt-4">
-          {Array.from({ length: totalDots }, (_, i) => (
-            <button
-              key={i}
-              onClick={() => scrollToIndex(i)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                activeIndex === i
-                  ? 'w-8 bg-red-600'
-                  : 'w-2 bg-slate-300 hover:bg-slate-400'
-              }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
         </div>
       </div>
-
-      {/* CTA */}
-      {/* <div className="max-w-7xl mx-auto px-4 relative z-10 mt-10 text-center">
-        <Link
-          href="/services"
-          className="group inline-flex items-center gap-2 bg-slate-900 hover:bg-red-600 text-white px-8 py-4 rounded-xl text-sm font-semibold transition-all duration-300 hover:shadow-glow"
-        >
-          View All Services
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </Link>
-      </div> */}
     </section>
   );
 }

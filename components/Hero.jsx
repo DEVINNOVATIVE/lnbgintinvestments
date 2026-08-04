@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { ArrowRight, ChevronLeft, ChevronRight, PhoneCall, Sparkles, TrendingUp } from 'lucide-react';
 
 const carouselSlides = [
@@ -31,7 +32,6 @@ const carouselSlides = [
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Auto-play carousel every 6 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
@@ -52,57 +52,74 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-[700px] lg:min-h-[760px] flex items-center overflow-hidden bg-slate-950">
-      {/* Background Images Carousel */}
-      {carouselSlides.map((slide, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
-            index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'
-          }`}
-        >
-          <Image
-            src={slide.image}
-            alt={`Hero Background ${index + 1}`}
-            fill
-            priority={index === 0}
-            quality={100}
-            unoptimized // Keeps background imagery crisp & clear
-            className="object-cover object-center"
-          />
-        </div>
-      ))}
+      <motion.div
+        key={activeSlide.image}
+        initial={{ opacity: 0, scale: 1.05 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.9, ease: 'easeOut' }}
+        className="absolute inset-0"
+      >
+        <Image
+          src={activeSlide.image}
+          alt="Hero Background"
+          fill
+          priority
+          quality={100}
+          unoptimized
+          className="object-cover object-center"
+        />
+      </motion.div>
 
-      {/* Light Gradient Overlay for Image Clarity */}
       <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/50 to-transparent z-10" />
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-slate-950/20 z-10" />
 
-      {/* Hero Main Content */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
-        <div className="max-w-2xl lg:max-w-3xl">
-          {/* Dynamic Tagline */}
-          <div className="inline-flex items-center gap-2 bg-slate-900/80 border border-white/20 backdrop-blur-md rounded-full px-4 py-1.5 mb-6 shadow-md">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="max-w-2xl lg:max-w-3xl"
+        >
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="inline-flex items-center gap-2 bg-slate-900/80 border border-white/20 backdrop-blur-md rounded-full px-4 py-1.5 mb-6 shadow-md"
+          >
             <TagIcon className="w-4 h-4 text-red-500" />
             <span className="text-white text-xs sm:text-sm font-semibold tracking-wider uppercase">
               {activeSlide.tag}
             </span>
-          </div>
+          </motion.div>
 
-          {/* Dynamic Heading */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.12] mb-6 tracking-tight drop-shadow-md">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.12] mb-6 tracking-tight drop-shadow-md"
+          >
             {activeSlide.titleLine1}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-400 to-rose-400">
               {activeSlide.highlight}
             </span>
             {activeSlide.titleLine2}
-          </h1>
+          </motion.h1>
 
-          {/* Subtext */}
-          <p className="text-slate-200 text-base sm:text-lg leading-relaxed mb-8 max-w-xl font-normal drop-shadow">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="text-slate-200 text-base sm:text-lg leading-relaxed mb-8 max-w-xl font-normal drop-shadow"
+          >
             {activeSlide.description}
-          </p>
+          </motion.p>
 
-          {/* Modern Action Buttons */}
-          <div className="flex flex-wrap gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="flex flex-wrap gap-4"
+          >
             <Link
               href="/services"
               className="group inline-flex items-center gap-2.5 bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-xl text-sm font-bold shadow-lg shadow-red-600/30 hover:shadow-red-600/50 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
@@ -118,13 +135,16 @@ export default function Hero() {
               <PhoneCall className="w-4 h-4 text-red-400 group-hover:text-slate-900 group-hover:rotate-12 transition-all duration-300" />
               Contact Us
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
 
-      {/* Modern Carousel Controls */}
-      <div className="absolute bottom-8 right-6 sm:right-10 z-30 flex items-center gap-3">
-        {/* Previous Button */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.35 }}
+        className="absolute bottom-8 right-6 sm:right-10 z-30 flex items-center gap-3"
+      >
         <button
           onClick={handlePrev}
           aria-label="Previous Slide"
@@ -133,7 +153,6 @@ export default function Hero() {
           <ChevronLeft className="w-5 h-5" />
         </button>
 
-        {/* Slide Dots */}
         <div className="flex items-center gap-2 px-2">
           {carouselSlides.map((_, idx) => (
             <button
@@ -147,7 +166,6 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* Next Button */}
         <button
           onClick={handleNext}
           aria-label="Next Slide"
@@ -155,7 +173,7 @@ export default function Hero() {
         >
           <ChevronRight className="w-5 h-5" />
         </button>
-      </div>
+      </motion.div>
     </section>
   );
 }

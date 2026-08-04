@@ -68,6 +68,7 @@
 // }
 'use client';
 
+import { motion } from 'framer-motion';
 import {
   Briefcase,
   TrendingUp,
@@ -141,7 +142,13 @@ export default function Services8() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.55 }}
+          className="text-center mb-16"
+        >
           <div className="inline-flex items-center gap-2 bg-red-100 text-red-600 rounded-full px-4 py-1.5 mb-4 border border-red-200/60 shadow-sm">
             <span className="w-2 h-2 bg-red-600 rounded-full" />
             <span className="text-xs font-extrabold uppercase tracking-widest">What We Offer</span>
@@ -155,15 +162,19 @@ export default function Services8() {
           <p className="text-slate-600 max-w-2xl mx-auto text-base sm:text-lg">
             Comprehensive financial and investment solutions designed to accelerate your capital growth across every dimension.
           </p>
-        </div>
+        </motion.div>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, i) => {
             const Icon = service.icon;
             return (
-              <div
+              <motion.div
                 key={i}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: i * 0.06 }}
                 className="group relative bg-white p-7 rounded-3xl shadow-sm hover:shadow-2xl hover:shadow-red-600/10 transition-all duration-300 border border-slate-200/80 hover:border-red-200 hover:-translate-y-2 overflow-hidden flex flex-col justify-between"
               >
                 {/* Hover gradient overlay */}
@@ -195,7 +206,7 @@ export default function Services8() {
 
                 {/* Bottom Accent Bar */}
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 to-rose-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-              </div>
+              </motion.div>
             );
           })}
         </div>

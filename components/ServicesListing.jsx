@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { services } from '@/lib/serviceData';
+import { services, getAllCategories } from '@/lib/serviceData';
 import { getServiceIcon } from '@/lib/serviceIcons';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 import ServicesSidebar from '@/components/ServicesSidebar';
@@ -11,15 +12,34 @@ const ITEMS_PER_PAGE = 4;
 
 export default function ServicesListing() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const totalPages = Math.ceil(services.length / ITEMS_PER_PAGE);
+  const categoryOptions = [
+    { label: 'All', count: services.length },
+    ...getAllCategories(),
+  ];
+
+  const filteredServices =
+    selectedCategory === 'All'
+      ? services
+      : services.filter((service) => service.categories?.includes(selectedCategory));
+
+  const totalPages = Math.max(1, Math.ceil(filteredServices.length / ITEMS_PER_PAGE));
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const visibleServices = services.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  const visibleServices = filteredServices.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory]);
 
   function handlePageChange(page) {
     if (page < 1 || page > totalPages) return;
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function handleCategoryChange(category) {
+    setSelectedCategory(category);
   }
 
   return (
@@ -28,14 +48,35 @@ export default function ServicesListing() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
 
           {/* ── LEFT: SERVICE POST LIST ───────── */}
-          <div className="lg:col-span-2 space-y-8">
-            {visibleServices.map((service) => {
-              const Icon = getServiceIcon(service.iconName);
-              return (
-                <article
-                  key={service.slug}
-                  className="group bg-white rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden border border-slate-100"
-                >
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.55 }}
+            className="lg:col-span-2 space-y-8"
+          >
+            {filteredServices.length === 0 ? (
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.4 }}
+                className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-6 py-10 text-center text-slate-600"
+              >
+                No services found for this category yet.
+              </motion.div>
+            ) : (
+              visibleServices.map((service, index) => {
+                const Icon = getServiceIcon(service.iconName);
+                return (
+                  <motion.article
+                    key={service.slug}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.5, delay: index * 0.08 }}
+                    className="group bg-white rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden border border-slate-100"
+                  >
                   <Link href={`/services/${service.slug}`} className="block relative overflow-hidden">
                     <img
                       src={service.image}
@@ -66,12 +107,19 @@ export default function ServicesListing() {
                       READ MORE <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>
-                </article>
-              );
-            })}
+                  </motion.article>
+                );
+              })
+            )}
 
             {/* ── PAGINATION ────────────────────── */}
-            <div className="flex items-center justify-center gap-1.5 pt-4">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: 0.1 }}
+              className="flex items-center justify-center gap-1.5 pt-4"
+            >
               {/* Prev */}
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
@@ -104,16 +152,27 @@ export default function ServicesListing() {
               >
                 ›
               </button>
-            </div>
+            </motion.div>
 
             {/* Page info */}
-            <p className="text-center text-xs text-slate-400 -mt-2">
-              Showing {startIndex + 1}–{Math.min(startIndex + ITEMS_PER_PAGE, services.length)} of {services.length} services
-            </p>
-          </div>
+            <motion.p
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.4, delay: 0.15 }}
+              className="text-center text-xs text-slate-400 -mt-2"
+            >
+              Showing {filteredServices.length === 0 ? 0 : startIndex + 1}–{Math.min(startIndex + ITEMS_PER_PAGE, filteredServices.length)} of {filteredServices.length} services
+              {selectedCategory !== 'All' ? ` in ${selectedCategory}` : ''}
+            </motion.p>
+          </motion.div>
 
           {/* ── RIGHT SIDEBAR ─────────────────── */}
-          <ServicesSidebar />
+          <ServicesSidebar
+            categories={categoryOptions}
+            activeCategory={selectedCategory}
+            onSelectCategory={handleCategoryChange}
+          />
         </div>
       </div>
     </section>

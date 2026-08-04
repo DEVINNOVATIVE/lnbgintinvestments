@@ -78,6 +78,7 @@
 'use client';
 
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { CheckCircle2, Target, Award, ShieldCheck } from 'lucide-react';
 
 const checkpoints = [
@@ -89,58 +90,77 @@ const checkpoints = [
 export default function Mission() {
   return (
     <section className="py-24 bg-gradient-to-b from-slate-50 via-white to-slate-50 relative overflow-hidden">
-      {/* Background Decorative Glow Effects */}
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-red-500/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-10 right-0 w-80 h-80 bg-rose-500/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
-          {/* Left Column: Mission Content */}
           <div className="lg:col-span-6 space-y-8">
-            {/* Pill Tag */}
-            <div className="inline-flex items-center gap-2 bg-red-50 border border-red-100 rounded-full px-4 py-1.5 shadow-sm">
-              <Target className="w-4 h-4 text-red-600" />
-              <span className="text-xs font-bold uppercase tracking-wider text-red-600">
-                Our Mission & Vision
-              </span>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="inline-flex items-center gap-2 bg-red-50 border border-red-100 rounded-full px-4 py-1.5 shadow-sm">
+                <Target className="w-4 h-4 text-red-600" />
+                <span className="text-xs font-bold uppercase tracking-wider text-red-600">
+                  Our Mission & Vision
+                </span>
+              </div>
+            </motion.div>
 
-            {/* Main Headline */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-[1.15] tracking-tight">
+            <motion.h2
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-[1.15] tracking-tight"
+            >
               Our mission is to provide access to a wide range of{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-rose-600 to-red-500">
                 strategic services
               </span>
-            </h2>
+            </motion.h2>
 
-            {/* Mission Statement Description */}
-            <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal"
+            >
               Our vision is to increase stakeholders’ value through employing effective technology, sales, and marketing practices to serve the needs of our customers. We aim to increase international and domestic market share while conducting ourselves with integrity, speed, and flexibility—never compromising on high standards or environmental awareness.
-            </p>
+            </motion.p>
 
-            {/* Checkpoints List */}
             <div className="space-y-4 pt-2">
               {checkpoints.map((item, i) => (
-                <div 
-                  key={i} 
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.45, delay: i * 0.08 }}
                   className="flex items-start gap-4 p-3 rounded-xl hover:bg-white hover:shadow-md transition-all duration-300 border border-transparent hover:border-slate-100 group"
                 >
                   <div className="w-7 h-7 rounded-full bg-red-100 group-hover:bg-red-600 flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors duration-300">
                     <CheckCircle2 className="w-4 h-4 text-red-600 group-hover:text-white transition-colors duration-300" />
                   </div>
-                  <span className="text-slate-700 text-sm font-medium leading-relaxed">
-                    {item}
-                  </span>
-                </div>
+                  <span className="text-slate-700 text-sm font-medium leading-relaxed">{item}</span>
+                </motion.div>
               ))}
             </div>
 
-            {/* Founder Profile Card */}
-            <div className="pt-6 border-t border-slate-200/80 flex items-center gap-5">
-              <div className="relative w-16 h-16 rounded-full overflow-hidden border-2  shadow-lg flex-shrink-0">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.55, delay: 0.2 }}
+              className="pt-6 border-t border-slate-200/80 flex items-center gap-5"
+            >
+              <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 shadow-lg flex-shrink-0">
                 <Image
-                  src="/assets/founder.png" // Ensure this image is saved in public/assets/
+                  src="/assets/founder.png"
                   alt="Lord Neil B Gibson"
                   fill
                   quality={100}
@@ -149,22 +169,21 @@ export default function Mission() {
                 />
               </div>
               <div>
-                <h4 className="text-xl font-bold text-slate-900 leading-snug">
-                  Lord Neil B Gibson
-                </h4>
-                <p className="text-sm font-semibold text-slate-500">
-                  CEO &amp; Company Founder
-                </p>
+                <h4 className="text-xl font-bold text-slate-900 leading-snug">Lord Neil B Gibson</h4>
+                <p className="text-sm font-semibold text-slate-500">CEO &amp; Company Founder</p>
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Right Column: Modern Image Collage & Badge Overlay */}
           <div className="lg:col-span-6 relative">
             <div className="grid grid-cols-12 gap-4 items-center">
-              
-              {/* Top Image Card (Crypto Trade) */}
-              <div className="col-span-7 relative group rounded-3xl overflow-hidden shadow-2xl border border-white/50">
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6 }}
+                className="col-span-7 relative group rounded-3xl overflow-hidden shadow-2xl border border-white/50"
+              >
                 <div className="relative h-64 sm:h-72 w-full">
                   <Image
                     src="/assets/crypto-trade.jpg"
@@ -180,10 +199,15 @@ export default function Mission() {
                     <div className="text-sm font-bold">Automated Systems</div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Floating Stat Badge */}
-              <div className="col-span-5 bg-slate-900 text-white rounded-3xl p-6 shadow-xl border border-slate-800 space-y-2">
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.55, delay: 0.1 }}
+                className="col-span-5 bg-slate-900 text-white rounded-3xl p-6 shadow-xl border border-slate-800 space-y-2"
+              >
                 <div className="w-10 h-10 rounded-2xl bg-red-600/20 border border-red-500/30 flex items-center justify-center">
                   <ShieldCheck className="w-5 h-5 text-red-500" />
                 </div>
@@ -191,10 +215,15 @@ export default function Mission() {
                 <div className="text-xs text-slate-400 font-medium leading-tight">
                   Integrity &amp; Compliance Standards
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Bottom Main Image Card (Meeting) */}
-              <div className="col-span-12 relative group rounded-3xl overflow-hidden shadow-2xl border border-white/50 mt-2">
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="col-span-12 relative group rounded-3xl overflow-hidden shadow-2xl border border-white/50 mt-2"
+              >
                 <div className="relative h-72 sm:h-80 w-full">
                   <Image
                     src="/assets/lnbg-meeting-2.jpg"
@@ -205,8 +234,6 @@ export default function Mission() {
                     className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
-                  
-                  {/* Floating Overlay Content */}
                   <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-white">
                     <div>
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-600/80 text-white text-xs font-semibold backdrop-blur-md mb-2">
@@ -216,11 +243,9 @@ export default function Mission() {
                     </div>
                   </div>
                 </div>
-              </div>
-
+              </motion.div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

@@ -632,6 +632,7 @@
 'use client';
 
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 const services = [
@@ -670,7 +671,13 @@ export default function ExpertiseAccordionSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left Column */}
-          <div className="lg:col-span-5 space-y-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-5 space-y-8"
+          >
             <span className="text-red-500 text-xs font-bold uppercase tracking-widest bg-red-500/10 px-3 py-1 rounded-md border border-red-500/20">
               Core Capabilities
             </span>
@@ -683,7 +690,6 @@ export default function ExpertiseAccordionSection() {
               We work closely with high-net-worth individuals, private clients, family offices, and businesses to provide bespoke investment advisory services backed by rigorous analysis.
             </p>
 
-            {/* Performance Metrics */}
             <div className="space-y-5 pt-4">
               <div>
                 <div className="flex justify-between text-xs font-bold mb-2">
@@ -714,15 +720,25 @@ export default function ExpertiseAccordionSection() {
                 Get Started Today
               </Link>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Accordion Cards */}
-          <div className="lg:col-span-7 space-y-4">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.08 }}
+            className="lg:col-span-7 space-y-4"
+          >
             {services.map((service, idx) => {
               const isExpanded = expandedIndex === idx;
               return (
-                <div
+                <motion.div
                   key={service.id}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.45, delay: idx * 0.07 }}
                   onClick={() => setExpandedIndex(idx)}
                   className={`cursor-pointer rounded-2xl border transition-all duration-300 overflow-hidden ${
                     isExpanded
@@ -744,7 +760,6 @@ export default function ExpertiseAccordionSection() {
                     </span>
                   </div>
 
-                  {/* Expanded Content Body */}
                   {isExpanded && (
                     <div className="mt-4 pt-4 border-t border-slate-800/60 space-y-5 animate-fadeIn">
                       <p className="text-slate-300 text-sm leading-relaxed">
@@ -763,10 +778,10 @@ export default function ExpertiseAccordionSection() {
                       </div>
                     </div>
                   )}
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
 
         </div>
       </div>

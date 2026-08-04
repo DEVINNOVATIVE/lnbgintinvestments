@@ -155,6 +155,7 @@
 'use client';
 
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { CheckCircle2, Target } from 'lucide-react';
 
 const checkpoints = [
@@ -174,32 +175,50 @@ export default function AboutMission() {
           
           {/* Left Column: Mission Content */}
           <div className="lg:col-span-6 space-y-8">
-            {/* Pill Tag */}
-            <div className="inline-flex items-center gap-2 bg-red-50 border border-red-100 rounded-full px-4 py-1.5 shadow-sm">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.55 }}
+              className="inline-flex items-center gap-2 bg-red-50 border border-red-100 rounded-full px-4 py-1.5 shadow-sm"
+            >
               <Target className="w-4 h-4 text-red-600" />
               <span className="text-xs font-bold uppercase tracking-wider text-red-600">
                 Our Mission &amp; Vision
               </span>
-            </div>
+            </motion.div>
 
-            {/* Main Headline */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-[1.15] tracking-tight">
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.55, delay: 0.05 }}
+              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-[1.15] tracking-tight"
+            >
               Our mission is to provide access to a wide range of{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-rose-600 to-red-500">
                 strategic services
               </span>
-            </h2>
+            </motion.h2>
 
-            {/* Mission Statement Description */}
-            <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.55, delay: 0.1 }}
+              className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal"
+            >
               Our vision is to increase stakeholders’ value through employing effective technology, sales and marketing practices, to serve the needs of our customers, while increasing international and domestic market share, and to conduct ourselves with integrity, speed, and flexibility. When dealing with Employees, Customers, and the Community, we never compromise on our high level of standards and Environmental awareness.
-            </p>
+            </motion.p>
 
-            {/* Checkpoints List */}
             <div className="space-y-4 pt-2">
               {checkpoints.map((item, i) => (
-                <div 
-                  key={i} 
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.45, delay: i * 0.07 }}
                   className="flex items-start gap-4 p-3 rounded-xl hover:bg-white hover:shadow-md transition-all duration-300 border border-transparent hover:border-slate-100 group"
                 >
                   <div className="w-7 h-7 rounded-full bg-red-100 group-hover:bg-red-600 flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors duration-300">
@@ -208,13 +227,18 @@ export default function AboutMission() {
                   <span className="text-slate-700 text-sm font-medium leading-relaxed">
                     {item}
                   </span>
-                </div>
+                </motion.div>
               ))}
             </div>
 
-            {/* Founder Profile Card */}
-            <div className="pt-6 border-t border-slate-200/80 flex items-center gap-5">
-              <div className="relative w-16 h-16 rounded-full overflow-hidden border-2shadow-lg flex-shrink-0">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.55, delay: 0.15 }}
+              className="pt-6 border-t border-slate-200/80 flex items-center gap-5"
+            >
+              <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 shadow-lg flex-shrink-0">
                 <Image
                   src="/assets/founder.png"
                   alt="Lord Neil B Gibson"
@@ -232,13 +256,17 @@ export default function AboutMission() {
                   CEO &amp; Company Founder
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Right Column: Clean Overlapping Layered Image Collage using ONLY m1.jpg & m2.jpg */}
-          <div className="lg:col-span-6 relative pb-12 sm:pb-16 lg:pb-20 pr-6 sm:pr-12">
-            
-            {/* Primary Main Image: m1.jpg */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-6 relative pb-12 sm:pb-16 lg:pb-20 pr-6 sm:pr-12"
+          >
             <div className="relative w-full h-[380px] sm:h-[460px] rounded-3xl overflow-hidden shadow-2xl border border-white/80 group">
               <Image
                 src="/assets/m1.jpg"
@@ -250,7 +278,6 @@ export default function AboutMission() {
               />
             </div>
 
-            {/* Overlapping Foreground Image: m2.jpg */}
             <div className="absolute bottom-0 right-0 w-[70%] sm:w-[65%] h-[230px] sm:h-[280px] rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.25)] border-8 border-white group z-20">
               <Image
                 src="/assets/m2.jpg"
@@ -261,8 +288,7 @@ export default function AboutMission() {
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
               />
             </div>
-
-          </div>
+          </motion.div>
 
         </div>
       </div>

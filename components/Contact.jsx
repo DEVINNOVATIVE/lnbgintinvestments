@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Mail, Phone, Clock, MapPin, Send, CheckCircle2, User, MessageSquare, Loader2, AlertCircle } from 'lucide-react';
 
 const EMPTY_FORM = { name: '', email: '', phone: '', message: '' };
@@ -58,7 +59,13 @@ export default function Contact() {
       <div className="absolute inset-0 bg-grid opacity-20" />
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.55 }}
+          className="text-center mb-16"
+        >
           <div className="inline-flex items-center gap-2 bg-red-100 text-red-600 rounded-full px-4 py-1.5 mb-4">
             <span className="w-2 h-2 bg-red-600 rounded-full" />
             <span className="text-xs font-semibold uppercase tracking-widest">Get In Touch</span>
@@ -69,10 +76,9 @@ export default function Contact() {
           <p className="text-slate-500 max-w-2xl mx-auto">
             Our team is ready to discuss your investment goals and explore how we can help your business grow.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-          {/* Contact info cards */}
           <div className="lg:col-span-2 space-y-4">
             <h3 className="text-2xl font-bold text-slate-900 mb-2">Let&apos;s talk business</h3>
             <p className="text-slate-500 text-sm mb-6 leading-relaxed">
@@ -81,8 +87,12 @@ export default function Contact() {
             {contactInfo.map((info, i) => {
               const Icon = info.icon;
               return (
-                <div
+                <motion.div
                   key={i}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.45, delay: i * 0.07 }}
                   className="group flex items-start gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100 hover:border-red-200 hover:bg-white hover:shadow-card transition-all duration-300"
                 >
                   <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-red-700 rounded-xl flex items-center justify-center flex-shrink-0 shadow-glow group-hover:scale-110 transition-transform duration-300">
@@ -92,17 +102,19 @@ export default function Contact() {
                     <div className="font-semibold text-slate-900 text-sm">{info.title}</div>
                     <div className="text-slate-500 text-sm mt-0.5">{info.value}</div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-
-        
-           
           </div>
 
-          {/* Contact form */}
           <div className="lg:col-span-3">
-            <div className="bg-gradient-to-br from-slate-50 to-white p-8 md:p-10 rounded-3xl shadow-card border border-slate-100">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.55, delay: 0.1 }}
+              className="bg-gradient-to-br from-slate-50 to-white p-8 md:p-10 rounded-3xl shadow-card border border-slate-100"
+            >
               {submitted ? (
                 <div className="h-full flex flex-col items-center justify-center text-center py-20 animate-scale-in">
                   <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-5">
@@ -201,7 +213,7 @@ export default function Contact() {
                   </button>
                 </form>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

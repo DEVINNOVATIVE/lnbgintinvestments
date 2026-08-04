@@ -126,6 +126,7 @@
 
 'use client';
 
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Sparkles, Building2, TrendingUp, ShieldCheck, Award } from 'lucide-react';
 
@@ -140,52 +141,110 @@ export default function ServicesIntro() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Text Hierarchy */}
-          <div className="lg:col-span-6 space-y-8">
-            <div className="inline-flex items-center gap-2 bg-red-50 border border-red-100/80 rounded-full px-4 py-1.5 shadow-sm">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.55 }}
+            className="lg:col-span-6 space-y-8"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: 0.05 }}
+              className="inline-flex items-center gap-2 bg-red-50 border border-red-100/80 rounded-full px-4 py-1.5 shadow-sm"
+            >
               <Sparkles className="w-4 h-4 text-red-600" />
               <span className="text-xs font-bold uppercase tracking-widest text-red-600">
                 Leading Financial Advisory
               </span>
-            </div>
+            </motion.div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-4xl font-bold text-slate-900 leading-[1.18] tracking-tight">
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.08 }}
+              className="text-3xl sm:text-4xl lg:text-4xl font-bold text-slate-900 leading-[1.18] tracking-tight"
+            >
               LNBG INT INVESTMENTS is one of the leading financial advisors to the local{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-rose-600 to-red-500">
                 Investment Management
               </span>{' '}
               industry.
-            </h2>
+            </motion.h2>
 
             <div className="space-y-5 text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
-              <p className="p-4 rounded-2xl bg-white/90 border border-slate-100 shadow-sm backdrop-blur-sm">
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.12 }}
+                className="p-4 rounded-2xl bg-white/90 border border-slate-100 shadow-sm backdrop-blur-sm"
+              >
                 Our integrated teams of professionals from our Audit, Tax, and Advisory practices provide our clients with an in-depth understanding of the markets in which they operate, offering strategies spanning the fund lifecycle from value creation to realization.
-              </p>
-              <p>
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+              >
                 We aim to provide you with a tailored service of the highest standard. <strong className="text-slate-900 font-bold">LNBG INT INVESTMENTS</strong> is focused on our objectives of building trusted relationships and delivering quality service.
-              </p>
-              <p>
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.18 }}
+              >
                 We offer professional services to clients of all sizes, at local and global levels including investment managers, wealth managers, and fund administrators.
-              </p>
+              </motion.p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-              <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white border border-slate-200/60 shadow-sm">
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: 0.2 }}
+                className="flex items-center gap-3 p-3.5 rounded-2xl bg-white border border-slate-200/60 shadow-sm"
+              >
                 <Building2 className="w-5 h-5 text-red-600 flex-shrink-0" />
                 <span className="text-xs font-bold text-slate-800 uppercase tracking-wide">Global Reach</span>
-              </div>
-              <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white border border-slate-200/60 shadow-sm">
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: 0.24 }}
+                className="flex items-center gap-3 p-3.5 rounded-2xl bg-white border border-slate-200/60 shadow-sm"
+              >
                 <TrendingUp className="w-5 h-5 text-red-600 flex-shrink-0" />
                 <span className="text-xs font-bold text-slate-800 uppercase tracking-wide">Value Creation</span>
-              </div>
-              <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white border border-slate-200/60 shadow-sm">
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: 0.28 }}
+                className="flex items-center gap-3 p-3.5 rounded-2xl bg-white border border-slate-200/60 shadow-sm"
+              >
                 <ShieldCheck className="w-5 h-5 text-red-600 flex-shrink-0" />
                 <span className="text-xs font-bold text-slate-800 uppercase tracking-wide">Tailored Advice</span>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: STRUCTURE 1 - Overlapping Stack with Glass Badge */}
-          <div className="lg:col-span-6 relative pb-12 sm:pb-16 lg:pb-20 pr-4 sm:pr-8 pl-4">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-6 relative pb-12 sm:pb-16 lg:pb-20 pr-4 sm:pr-8 pl-4"
+          >
             
             {/* Primary Large Image */}
             <div className="relative w-full h-[360px] sm:h-[440px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white group">
@@ -212,7 +271,13 @@ export default function ServicesIntro() {
             </div>
 
             {/* Floating Glassmorphic Badge */}
-            <div className="absolute top-6 left-0 sm:-left-6 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3.5 z-30">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: 0.1 }}
+              className="absolute top-6 left-0 sm:-left-6 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3.5 z-30"
+            >
               <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-red-600 to-rose-700 flex items-center justify-center text-white shadow-md shadow-red-600/20">
                 <Award className="w-6 h-6" />
               </div>
@@ -220,9 +285,9 @@ export default function ServicesIntro() {
                 <div className="text-xs font-extrabold uppercase tracking-wider text-red-600">Top Rated</div>
                 <div className="text-sm font-bold text-slate-900">Financial Advisors</div>
               </div>
-            </div>
+            </motion.div>
 
-          </div>
+          </motion.div>
           
 
         </div>

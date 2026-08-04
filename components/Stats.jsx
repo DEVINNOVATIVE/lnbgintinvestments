@@ -83,6 +83,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const stats = [
   { value: 38, label: 'EMPLOYEES' },
@@ -138,18 +139,22 @@ function Counter({ value }) {
 
 export default function Stats() {
   return (
-    <section className="relative py-20 overflow-hidden ">
-      {/* Background ambient lighting for modern depth */}
-
-  <div className="absolute inset-0 bg-grid-dark opacity-30" />
+    <section className="relative py-20 overflow-hidden">
+      <div className="absolute inset-0 bg-grid-dark opacity-30" />
       <div className="absolute inset-0 bg-gradient-to-r from-red-700 via-red-800 to-slate-900" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-red-500/20 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-rose-500/10 rounded-full blur-3xl" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 items-center">
           {stats.map((stat, i) => (
-            <div key={i} className="group text-center">
-              {/* Number Container with Red Superscript Plus */}
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="group text-center"
+            >
               <div className="inline-flex items-start justify-center mb-3">
                 <span className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight group-hover:scale-105 transition-transform duration-300">
                   <Counter value={stat.value} />
@@ -159,11 +164,10 @@ export default function Stats() {
                 </span>
               </div>
 
-              {/* Label */}
               <div className="text-xs sm:text-sm font-bold text-slate-300 uppercase tracking-widest leading-relaxed">
                 {stat.label}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

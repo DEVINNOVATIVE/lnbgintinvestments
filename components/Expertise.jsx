@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 
 function useInView(ref) {
   const [inView, setInView] = useState(false);
@@ -41,8 +42,12 @@ export default function Expertise() {
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left: text + progress bars */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+          >
             <div className="inline-flex items-center gap-2 bg-red-100 text-red-600 rounded-full px-4 py-1.5 mb-5">
               <span className="w-2 h-2 bg-red-600 rounded-full" />
               <span className="text-xs font-semibold uppercase tracking-widest">Expertise</span>
@@ -59,16 +64,20 @@ export default function Expertise() {
               <ProgressBar label="Consulting" percent={80} />
               <ProgressBar label="Management" percent={85} />
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right: person image */}
-          <div className="relative flex justify-center">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="relative flex justify-center"
+          >
             <div className="relative w-full max-w-sm">
-              {/* Background blob */}
               <div className="absolute inset-0 bg-gradient-to-br from-red-50 to-slate-50 rounded-3xl transform rotate-3" />
               <div className="relative rounded-3xl overflow-hidden shadow-card-hover">
                 <img
-                  src="/assets/experties.png" // Ensure this image is saved in public/assets/
+                  src="/assets/experties.png"
                   alt="Investment Expert"
                   className="w-full object-cover"
                   style={{ maxHeight: '480px', objectPosition: 'top' }}
@@ -76,7 +85,6 @@ export default function Expertise() {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent" />
               </div>
 
-              {/* Floating stat card */}
               <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-card-hover p-4 border border-slate-100 animate-float">
                 <div className="text-2xl font-bold text-red-600">2K+</div>
                 <div className="text-xs text-slate-500 font-medium">Completed Projects</div>
@@ -86,7 +94,7 @@ export default function Expertise() {
                 <div className="text-xs text-slate-500 font-medium">Success Rate</div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
