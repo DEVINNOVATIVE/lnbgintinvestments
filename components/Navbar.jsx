@@ -1,12 +1,11 @@
-
-
 'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Mail, Phone, Clock, ChevronRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Phone } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -21,143 +20,192 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 30);
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
+
   return (
-    <header className="w-full sticky top-0 z-50">
-      {/* Top contact bar */}
-      <div
-        className={`hidden md:block transition-all duration-500 overflow-hidden bg-slate-900 text-slate-300 ${
-          scrolled ? 'max-h-0 opacity-0' : 'max-h-20 opacity-100'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between text-xs">
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2">
-              <Mail className="w-3.5 h-3.5 text-red-500" />
-              <span>lnbg@lnbgllc.com</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Phone className="w-3.5 h-3.5 text-red-500" />
-              <span>+44 7887 447527</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-3.5 h-3.5 text-red-500" />
-              <span>Sat - Wed: 8:00 - 4:00</span>
-            </div>
-          </div>
-
-
-
-          {/* <div className="flex items-center gap-2 text-slate-400">
-            <span className="text-red-500">Follow us:</span>
-            <span className="hover:text-white cursor-pointer transition">in</span>
-            <span className="hover:text-white cursor-pointer transition">f</span>
-            <span className="hover:text-white cursor-pointer transition">x</span>
-          </div> */}
-        </div>
-      </div>
-
-      {/* Main nav */}
-      <nav
-        className={`transition-all duration-300 ${
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'glass shadow-lg border-b border-white/20'
-            : 'bg-white/95 backdrop-blur-sm border-b border-slate-100'
+            ? 'bg-[#070D1B]/90 backdrop-blur-xl border-b border-white/10 py-0 shadow-2xl shadow-black/30'
+            : 'bg-transparent py-2'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between h-20 py-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <Image 
-                src="/assets/logo.png" 
-                alt="LNBIG Logo" 
-                width={160} // Double the display size for Retina clarity
-                height={160} // Double the display size for Retina clarity
-                quality={100} // Prevents Next.js from compressing the logo
-                className="w-28 h-28 object-contain group-hover:scale-105 transition-transform duration-300"
-                priority // Ensures the logo loads immediately above the fold
-              />
+            <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+              <div className="relative w-10 h-10 lg:w-12 lg:h-12 rounded-xl overflow-hidden border border-white/20 shadow-lg group-hover:scale-105 transition-transform duration-300">
+                <Image
+                  src="/assets/logo.png"
+                  alt="LNBG Logo"
+                  fill
+                  quality={100}
+                  unoptimized
+                  className="object-contain p-0.5"
+                  priority
+                />
+              </div>
+              <div className="hidden sm:flex flex-col leading-none">
+                <span className="text-white font-black text-base lg:text-lg tracking-tight">LNBG</span>
+                <span className="text-red-400 text-[10px] font-bold uppercase tracking-[0.2em]">Int. Investments</span>
+              </div>
             </Link>
 
-            {/* Desktop nav */}
-            <div className="hidden md:flex items-center gap-1">
+            {/* Centered desktop nav */}
+            <nav className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
               {navLinks.map((item) => {
                 const active = pathname === item.href;
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${
+                    className={`relative px-5 py-2.5 text-sm font-semibold transition-all duration-300 rounded-full ${
                       active
-                        ? 'text-red-600'
-                        : 'text-slate-600 hover:text-red-600'
+                        ? 'text-white bg-white/10 border border-white/15'
+                        : 'text-slate-300 hover:text-white hover:bg-white/5'
                     }`}
                   >
                     {item.label}
                     {active && (
-                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-red-600 rounded-full" />
+                      <motion.span
+                        layoutId="nav-dot"
+                        className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-red-500"
+                      />
                     )}
                   </Link>
                 );
               })}
-            </div>
+            </nav>
 
             {/* CTA + mobile toggle */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 shrink-0">
+              <a
+                href="tel:+447887447527"
+                className={`hidden lg:flex items-center gap-2 text-sm font-semibold transition-colors ${
+                  scrolled ? 'text-slate-300 hover:text-white' : 'text-white/90 hover:text-white'
+                }`}
+              >
+                <Phone className="w-4 h-4 text-red-400" />
+                +44 7887 447527
+              </a>
               <Link
                 href="/contact"
-                className="hidden md:inline-flex items-center gap-1.5 bg-gradient-to-r from-red-600 to-red-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:shadow-glow hover:scale-105 transition-all duration-300"
+                className="hidden md:inline-flex items-center gap-1.5 bg-gradient-to-r from-red-600 to-red-700 text-white px-5 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-red-600/30 hover:shadow-red-600/50 hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 Get Quote
-                <ChevronRight className="w-4 h-4" />
+                <ArrowUpRight className="w-4 h-4" />
               </Link>
               <button
-                className="md:hidden text-slate-700 hover:text-red-600 transition-colors"
-                onClick={() => setMenuOpen(!menuOpen)}
+                className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 border border-white/15 text-white hover:bg-white/20 transition-colors"
+                onClick={() => setMenuOpen(true)}
+                aria-label="Open menu"
               >
-                {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                <Menu className="w-5 h-5" />
               </button>
             </div>
           </div>
         </div>
+      </header>
 
-        {/* Mobile menu */}
+      {/* Mobile slide-in drawer */}
+      <AnimatePresence>
         {menuOpen && (
-          <div className="md:hidden glass border-t border-white/20 animate-fade-in">
-            <div className="px-4 py-4 flex flex-col gap-1">
-              {navLinks.map((item) => {
-                const active = pathname === item.href;
-                return (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] md:hidden"
+              onClick={() => setMenuOpen(false)}
+            />
+            <motion.aside
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 280 }}
+              className="fixed top-0 right-0 bottom-0 w-[78%] max-w-sm bg-[#070D1B] border-l border-white/10 z-[70] md:hidden flex flex-col"
+            >
+              <div className="flex items-center justify-between p-5 border-b border-white/10">
+                <div className="flex items-center gap-2.5">
+                  <div className="relative w-10 h-10 rounded-xl overflow-hidden border border-white/20">
+                    <Image src="/assets/logo.png" alt="LNBG Logo" fill quality={100} unoptimized className="object-contain p-0.5" />
+                  </div>
+                  <div className="flex flex-col leading-none">
+                    <span className="text-white font-black text-base tracking-tight">LNBG</span>
+                    <span className="text-red-400 text-[10px] font-bold uppercase tracking-[0.2em]">Int. Investments</span>
+                  </div>
+                </div>
+                <button
+                  className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 border border-white/15 text-white hover:bg-white/20 transition-colors"
+                  onClick={() => setMenuOpen(false)}
+                  aria-label="Close menu"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="flex-1 overflow-y-auto p-5">
+                <nav className="flex flex-col gap-1">
+                  {navLinks.map((item, i) => {
+                    const active = pathname === item.href;
+                    return (
+                      <motion.div
+                        key={item.href}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 + i * 0.06 }}
+                      >
+                        <Link
+                          href={item.href}
+                          className={`flex items-center justify-between px-5 py-4 rounded-2xl text-base font-bold transition-all ${
+                            active
+                              ? 'bg-gradient-to-r from-red-600/20 to-transparent text-white border border-red-500/30'
+                              : 'text-slate-300 hover:bg-white/5 hover:text-white border border-transparent'
+                          }`}
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          {item.label}
+                          <ArrowUpRight className={`w-4 h-4 ${active ? 'text-red-400' : 'text-slate-500'}`} />
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </nav>
+
+                <div className="mt-8 pt-6 border-t border-white/10 space-y-4">
+                  <a href="tel:+447887447527" className="flex items-center gap-3 text-slate-300 text-sm font-semibold">
+                    <span className="w-9 h-9 rounded-xl bg-red-500/15 border border-red-500/20 flex items-center justify-center">
+                      <Phone className="w-4 h-4 text-red-400" />
+                    </span>
+                    +44 7887 447527
+                  </a>
                   <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                      active
-                        ? 'bg-red-50 text-red-600'
-                        : 'text-slate-700 hover:bg-slate-50'
-                    }`}
+                    href="/contact"
+                    className="flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-5 py-3.5 rounded-2xl text-sm font-bold shadow-lg shadow-red-600/30"
                     onClick={() => setMenuOpen(false)}
                   >
-                    {item.label}
+                    Get Quote
+                    <ArrowUpRight className="w-4 h-4" />
                   </Link>
-                );
-              })}
-              <Link
-                href="/contact"
-                className="mt-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-3 rounded-lg text-sm font-semibold text-center"
-                onClick={() => setMenuOpen(false)}
-              >
-                Get Quote
-              </Link>
-            </div>
-          </div>
+                </div>
+              </div>
+            </motion.aside>
+          </>
         )}
-      </nav>
-    </header>
+      </AnimatePresence>
+    </>
   );
 }
