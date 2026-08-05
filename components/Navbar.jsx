@@ -67,9 +67,9 @@ export default function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`relative px-5 py-2.5 text-sm font-semibold transition-all duration-300 rounded-full ${
+                    className={`relative px-4 py-2 text-sm font-semibold transition-all duration-300 rounded-full ${
                       active
-                        ? 'text-white bg-white/10 border border-white/15'
+                        ? 'text-white bg-white/10 '
                         : 'text-slate-300 hover:text-white hover:bg-white/5'
                     }`}
                   >
@@ -104,7 +104,7 @@ export default function Navbar() {
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
               <button
-                className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 border border-white/15 text-white hover:bg-white/20 transition-colors"
+                className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl  text-white hover:bg-white/20 transition-colors"
                 onClick={() => setMenuOpen(true)}
                 aria-label="Open menu"
               >
@@ -139,7 +139,7 @@ export default function Navbar() {
                   <Image src="/assets/logo.png" alt="LNBG Logo" fill quality={100} unoptimized className="object-contain p-1" />
                 </div>
                 <button
-                  className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/10 border border-white/15 text-white hover:bg-white/20 transition-colors"
+                  className="w-12 h-12 flex items-center justify-center rounded-xl  text-white hover:bg-white/20 transition-colors"
                   onClick={() => setMenuOpen(false)}
                   aria-label="Close menu"
                 >

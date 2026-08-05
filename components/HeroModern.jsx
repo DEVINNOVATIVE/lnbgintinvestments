@@ -314,17 +314,17 @@ export default function HeroModern() {
           className="flex flex-wrap items-center justify-center gap-4"
         >
           <Link
-            href="/our-services"
+            href="/contact"
             className="group inline-flex items-center gap-2.5 bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-full text-sm font-bold shadow-lg shadow-red-600/30 hover:shadow-red-600/50 hover:scale-105 active:scale-95 transition-all"
           >
-            Explore Services
+           Contact Us
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link
-            href="/about"
+            href="/our-services"
             className="inline-flex items-center gap-2.5 bg-white/5 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full text-sm font-bold hover:bg-white hover:text-slate-900 transition-all"
           >
-            Our Story
+            Explore Services
           </Link>
         </motion.div>
 
@@ -379,7 +379,7 @@ export default function HeroModern() {
         transition={{ delay: 1 }}
         className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-1 text-slate-400"
       >
-        <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Scroll</span>
+        {/* <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Scroll</span> */}
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}

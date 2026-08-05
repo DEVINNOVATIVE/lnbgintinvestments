@@ -9,15 +9,19 @@ import ExpertiseAccordion from '@/components/ExpertiseAccordion';
 import CtaBand from '@/components/CtaBand';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import Services from '@/components/Services';
+import Hero from '@/components/Hero';
 
 export default function Home() {
   return (
     <>
       <Navbar />
+      {/* <Hero/> */}
       <HeroModern />
       <Marquee />
       <MissionModern />
-      <ServicesBento />
+      {/* <ServicesBento /> */}
+        <Services/>
       <StatsBand />
       <WhyChooseModern />
       <ExpertiseAccordion />
