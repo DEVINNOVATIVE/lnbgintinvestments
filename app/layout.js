@@ -85,7 +85,8 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 // Active Dev Tunnel URL
-const DEV_TUNNEL_URL = 'https://lnbgintinvestments.com';
+const DEV_TUNNEL_URL = 'https://lnbgintinvestment.com';
+
 
 export const metadata = {
   metadataBase: new URL(DEV_TUNNEL_URL),
