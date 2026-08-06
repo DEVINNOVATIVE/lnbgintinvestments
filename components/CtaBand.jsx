@@ -65,7 +65,7 @@ export default function CtaBand() {
             className="inline-flex items-center gap-2.5 bg-white/5 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl text-sm font-bold hover:bg-white hover:text-slate-900 transition-all"
           >
             <Phone className="w-4 h-4 text-red-400" />
-            +44 7887 447527
+            +1 818 575 0663
           </a>
         </motion.div>
       </div>

@@ -142,7 +142,7 @@ export default function Footer() {
                   href="tel:+447887447527" 
                   className="text-slate-400 hover:text-white transition-colors duration-200 font-medium"
                 >
-                  +44-7887-447527
+                  +1 818 575 0663
                 </a>
               </div>
 
