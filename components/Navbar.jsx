@@ -94,7 +94,7 @@ export default function Navbar() {
                 }`}
               >
                 <Phone className="w-4 h-4 text-red-400" />
-                +44 7887 447527
+                +1 818 575 0663
               </a>
               <Link
                 href="/contact"
@@ -180,7 +180,7 @@ export default function Navbar() {
                     <span className="w-9 h-9 rounded-xl bg-red-500/15 border border-red-500/20 flex items-center justify-center">
                       <Phone className="w-4 h-4 text-red-400" />
                     </span>
-                    +44 7887 447527
+                    +1 818 575 0663
                   </a>
                   <Link
                     href="/contact"
