@@ -3,14 +3,24 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Linkedin, Twitter, Mail, ArrowRight, Sparkles, Award, Users, Globe as Globe2 } from 'lucide-react';
+import {
+  Linkedin,
+  Twitter,
+  Mail,
+  ArrowRight,
+  Sparkles,
+  Award,
+  Users,
+  Globe as Globe2,
+  Quote,
+} from 'lucide-react';
 
 const team = [
   {
     name: 'Lord Neil B Gibson',
     role: 'CEO & Founder',
     image: '/assets/founder.jpeg',
-    bio: 'Visionary leader with 25+ years steering global investment strategy and corporate growth.',
+    bio: 'Visionary leader with 25+ years steering global investment strategy and corporate growth across international markets.',
     tags: ['Strategy', 'Leadership'],
     socials: { linkedin: '#', twitter: '#', email: 'neil@lnbg-int.com' },
     featured: true,
@@ -80,19 +90,115 @@ const stats = [
   { icon: Sparkles, value: '98%', label: 'Client Retention' },
 ];
 
+function SocialButtons({ member, variant }) {
+  const size = variant === 'lg' ? 'w-10 h-10' : 'w-9 h-9';
+  const iconSize = variant === 'lg' ? 'w-4.5 h-4.5' : 'w-4 h-4';
+  return (
+    <div className="flex gap-2">
+      <a
+        href={member.socials.linkedin}
+        aria-label={`${member.name} LinkedIn`}
+        className={`${size} rounded-full bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-red-600 hover:border-red-600 transition-colors`}
+      >
+        <Linkedin className={iconSize} />
+      </a>
+      <a
+        href={member.socials.twitter}
+        aria-label={`${member.name} Twitter`}
+        className={`${size} rounded-full bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-red-600 hover:border-red-600 transition-colors`}
+      >
+        <Twitter className={iconSize} />
+      </a>
+      <a
+        href={`mailto:${member.socials.email}`}
+        aria-label={`Email ${member.name}`}
+        className={`${size} rounded-full bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-red-600 hover:border-red-600 transition-colors`}
+      >
+        <Mail className={iconSize} />
+      </a>
+    </div>
+  );
+}
+
+function FeaturedCard({ member, index }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.6, delay: 0.05 }}
+      className="group relative lg:col-span-2 lg:row-span-2 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 rounded-[2rem] overflow-hidden shadow-2xl border border-slate-700/50 hover:border-red-500/40 transition-all duration-500 hover:-translate-y-1"
+    >
+      {/* Ambient glow */}
+      <div className="absolute top-0 right-0 w-72 h-72 bg-red-600/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-rose-500/10 rounded-full blur-[90px] pointer-events-none" />
+
+      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-0 h-full">
+        {/* Image side */}
+        <div className="relative h-72 sm:h-full min-h-[320px] overflow-hidden">
+          <Image
+            src={member.image}
+            alt={member.name}
+            fill
+            quality={100}
+            unoptimized
+            className="object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-slate-900/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent sm:from-transparent" />
+
+          {/* Featured badge */}
+          <div className="absolute top-5 left-5 inline-flex items-center gap-1.5 bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5 shadow-lg shadow-red-600/30">
+            <Sparkles className="w-3 h-3" />
+            Founder
+          </div>
+        </div>
+
+        {/* Content side */}
+        <div className="p-8 sm:p-10 flex flex-col justify-center gap-5">
+          <Quote className="w-10 h-10 text-red-500/40" />
+          <div>
+            <h3 className="text-3xl font-black text-white mb-2">{member.name}</h3>
+            <p className="text-sm font-bold text-red-400 uppercase tracking-wider mb-4">{member.role}</p>
+            <p className="text-slate-300 leading-relaxed text-base">{member.bio}</p>
+          </div>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2">
+            {member.tags.map((tag) => (
+              <span
+                key={tag}
+                className="text-[11px] font-bold uppercase tracking-wider text-red-300 bg-red-500/10 border border-red-500/20 rounded-full px-3 py-1"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Social */}
+          <div className="pt-2">
+            <SocialButtons member={member} variant="lg" />
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom accent */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 to-rose-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+    </motion.div>
+  );
+}
+
 function TeamCard({ member, index }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.5, delay: (index % 4) * 0.08 }}
-      className={`group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-red-600/10 border border-slate-200/80 hover:border-red-200 transition-all duration-500 hover:-translate-y-2 ${
-        member.featured ? 'lg:col-span-2 lg:row-span-2' : ''
-      }`}
+      transition={{ duration: 0.5, delay: (index % 3) * 0.08 }}
+      className="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-red-600/10 border border-slate-200/80 hover:border-red-200 transition-all duration-500 hover:-translate-y-2"
     >
-      {/* Image */}
-      <div className={`relative overflow-hidden ${member.featured ? 'h-72 lg:h-80' : 'h-64'}`}>
+      {/* Image with overlay */}
+      <div className="relative h-64 overflow-hidden">
         <Image
           src={member.image}
           alt={member.name}
@@ -101,10 +207,10 @@ function TeamCard({ member, index }) {
           unoptimized
           className="object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/85 via-slate-900/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent" />
 
         {/* Tags */}
-        <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+        <div className="absolute top-4 left-4 flex flex-wrap gap-1.5">
           {member.tags.map((tag) => (
             <span
               key={tag}
@@ -115,41 +221,17 @@ function TeamCard({ member, index }) {
           ))}
         </div>
 
-        {/* Social icons - slide in on hover */}
-        <div className="absolute bottom-4 right-4 flex gap-2 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400">
-          <a
-            href={member.socials.linkedin}
-            aria-label={`${member.name} LinkedIn`}
-            className="w-9 h-9 rounded-full bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-red-600 hover:border-red-600 transition-colors"
-          >
-            <Linkedin className="w-4 h-4" />
-          </a>
-          <a
-            href={member.socials.twitter}
-            aria-label={`${member.name} Twitter`}
-            className="w-9 h-9 rounded-full bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-red-600 hover:border-red-600 transition-colors"
-          >
-            <Twitter className="w-4 h-4" />
-          </a>
-          <a
-            href={`mailto:${member.socials.email}`}
-            aria-label={`Email ${member.name}`}
-            className="w-9 h-9 rounded-full bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-red-600 hover:border-red-600 transition-colors"
-          >
-            <Mail className="w-4 h-4" />
-          </a>
+        {/* Social icons - slide up on hover */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400">
+          <SocialButtons member={member} variant="sm" />
         </div>
       </div>
 
       {/* Info */}
-      <div className="p-6">
-        <h3 className={`font-black text-slate-900 mb-1 ${member.featured ? 'text-2xl' : 'text-lg'}`}>
-          {member.name}
-        </h3>
+      <div className="p-6 text-center">
+        <h3 className="text-lg font-black text-slate-900 mb-1">{member.name}</h3>
         <p className="text-sm font-bold text-red-600 mb-3">{member.role}</p>
-        <p className={`text-slate-500 leading-relaxed ${member.featured ? 'text-base' : 'text-sm'}`}>
-          {member.bio}
-        </p>
+        <p className="text-slate-500 text-sm leading-relaxed">{member.bio}</p>
       </div>
 
       {/* Bottom accent */}
@@ -159,11 +241,14 @@ function TeamCard({ member, index }) {
 }
 
 export default function Team() {
+  const featured = team.find((m) => m.featured);
+  const rest = team.filter((m) => !m.featured);
+
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section className="py-24 bg-slate-50 relative overflow-hidden">
       {/* Ambient background */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-red-50/80 to-transparent rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f940_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f940_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_50%,transparent_100%)] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-gradient-to-b from-red-50/80 to-transparent rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f030_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f030_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_50%,transparent_100%)] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -214,7 +299,7 @@ export default function Team() {
             return (
               <div
                 key={i}
-                className="flex items-center gap-4 p-5 bg-slate-50 border border-slate-200/80 rounded-2xl hover:border-red-200 hover:bg-white hover:shadow-lg hover:shadow-red-600/5 transition-all duration-300"
+                className="flex items-center gap-4 p-5 bg-white border border-slate-200/80 rounded-2xl shadow-sm hover:shadow-lg hover:shadow-red-600/5 hover:border-red-200 transition-all duration-300"
               >
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-rose-700 flex items-center justify-center shadow-lg shadow-red-600/20 flex-shrink-0">
                   <Icon className="w-6 h-6 text-white" />
@@ -228,10 +313,11 @@ export default function Team() {
           })}
         </motion.div>
 
-        {/* Team grid */}
+        {/* Featured + grid layout */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
-          {team.map((member, i) => (
-            <TeamCard key={i} member={member} index={i} />
+          <FeaturedCard member={featured} index={0} />
+          {rest.map((member, i) => (
+            <TeamCard key={i} member={member} index={i + 1} />
           ))}
         </div>
 
@@ -241,23 +327,29 @@ export default function Team() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5 }}
-          className="mt-16 text-center"
+          className="mt-16"
         >
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-slate-50 border border-slate-200/80 rounded-3xl px-8 py-6">
-            <div className="text-left">
-              <h3 className="text-xl font-black text-slate-900">Want to join our team?</h3>
-              <p className="text-sm text-slate-500 mt-1">We&apos;re always looking for exceptional talent.</p>
+          <div className="relative bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 rounded-3xl px-8 py-10 sm:px-12 sm:py-12 overflow-hidden border border-slate-700/50">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-red-600/20 rounded-full blur-[100px] pointer-events-none" />
+            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div>
+                <h3 className="text-2xl font-black text-white mb-2">Want to join our team?</h3>
+                <p className="text-slate-400 text-sm sm:text-base">We&apos;re always looking for exceptional talent to drive the future of investment.</p>
+              </div>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-sm px-7 py-3.5 rounded-xl shadow-lg shadow-red-600/30 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
+              >
+                Get in Touch
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-sm px-7 py-3.5 rounded-xl shadow-lg shadow-red-600/20 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
-            >
-              Get in Touch
-              <ArrowRight className="w-4 h-4" />
-            </Link>
           </div>
         </motion.div>
       </div>
     </section>
   );
 }
+
+
+export default Team
