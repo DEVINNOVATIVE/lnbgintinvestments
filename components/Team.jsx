@@ -3,353 +3,103 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import {
-  Linkedin,
-  Twitter,
-  Mail,
-  ArrowRight,
-  Sparkles,
-  Award,
-  Users,
-  Globe as Globe2,
-  Quote,
-} from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 const team = [
   {
-    name: 'Lord Neil B Gibson',
+    name: 'Lord Neil Gibson',
     role: 'CEO & Founder',
-    image: '/assets/founder.jpeg',
-    bio: 'Visionary leader with 25+ years steering global investment strategy and corporate growth across international markets.',
-    tags: ['Strategy', 'Leadership'],
-    socials: { linkedin: '#', twitter: '#', email: 'neil@lnbg-int.com' },
-    featured: true,
+    image: '/assets/ceo.png',
   },
   {
-    name: 'Sarah Mitchell',
-    role: 'Chief Investment Officer',
-    image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f44?auto=format&fit=crop&w=600&q=80',
-    bio: 'Heads portfolio management with deep expertise across equities, fixed income, and alternatives.',
-    tags: ['Portfolio', 'Equities'],
-    socials: { linkedin: '#', twitter: '#', email: 'sarah@lnbg-int.com' },
+    name: 'Rached Arfaoui',
+    role: 'Managing Director',
+    image: '/assets/rashed-1.png',
   },
   {
-    name: 'James Carter',
-    role: 'Head of Asset Management',
-    image: 'https://images.unsplash.com/photo-1560250097-0219db962ad3?auto=format&fit=crop&w=600&q=80',
-    bio: 'Leads asset allocation strategy and innovative product development across global markets.',
-    tags: ['Assets', 'Global'],
-    socials: { linkedin: '#', twitter: '#', email: 'james@lnbg-int.com' },
+    name: 'Linda Heath',
+    role: 'Financial Advisor',
+    image: '/assets/linda-heath-2.png',
   },
   {
-    name: 'Elena Rodriguez',
-    role: 'Director of Research',
-    image: 'https://images.unsplash.com/photo-1580489944761-6a2a4ba3b1c9?auto=format&fit=crop&w=600&q=80',
-    bio: 'Drives market intelligence and proprietary research powering our investment decisions.',
-    tags: ['Research', 'Analytics'],
-    socials: { linkedin: '#', twitter: '#', email: 'elena@lnbg-int.com' },
-  },
-  {
-    name: 'Michael Chen',
-    role: 'Head of Corporate Investments',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80',
-    bio: 'Identifies high-growth opportunities and structures selective corporate investments.',
-    tags: ['M&A', 'Growth'],
-    socials: { linkedin: '#', twitter: '#', email: 'michael@lnbg-int.com' },
-  },
-  {
-    name: 'Amelia Thompson',
-    role: 'Head of Global Services',
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=600&q=80',
-    bio: 'Builds international partnerships across 25+ countries to expand client capabilities.',
-    tags: ['Global', 'Partnerships'],
-    socials: { linkedin: '#', twitter: '#', email: 'amelia@lnbg-int.com' },
-  },
-  {
-    name: 'David Okafor',
-    role: 'Director of Real Estate',
-    image: 'https://images.unsplash.com/photo-1500648766842-4b1ad8d7f1f0?auto=format&fit=crop&w=600&q=80',
-    bio: 'Manages REIT structures and premier real estate projects across emerging markets.',
-    tags: ['Real Estate', 'REIT'],
-    socials: { linkedin: '#', twitter: '#', email: 'david@lnbg-int.com' },
-  },
-  {
-    name: 'Priya Sharma',
-    role: 'Head of Compliance',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80',
-    bio: 'Ensures uncompromising regulatory standards and risk governance across all operations.',
-    tags: ['Compliance', 'Risk'],
-    socials: { linkedin: '#', twitter: '#', email: 'priya@lnbg-int.com' },
+    name: 'Habib Rehman',
+    role: 'Marketing & Development',
+    image: '/assets/habib-rehman.png',
   },
 ];
-
-const stats = [
-  { icon: Users, value: '120+', label: 'Team Members' },
-  { icon: Globe2, value: '25+', label: 'Countries' },
-  { icon: Award, value: '15+', label: 'Industry Awards' },
-  { icon: Sparkles, value: '98%', label: 'Client Retention' },
-];
-
-function SocialButtons({ member, variant }) {
-  const size = variant === 'lg' ? 'w-10 h-10' : 'w-9 h-9';
-  const iconSize = variant === 'lg' ? 'w-4.5 h-4.5' : 'w-4 h-4';
-  return (
-    <div className="flex gap-2">
-      <a
-        href={member.socials.linkedin}
-        aria-label={`${member.name} LinkedIn`}
-        className={`${size} rounded-full bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-red-600 hover:border-red-600 transition-colors`}
-      >
-        <Linkedin className={iconSize} />
-      </a>
-      <a
-        href={member.socials.twitter}
-        aria-label={`${member.name} Twitter`}
-        className={`${size} rounded-full bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-red-600 hover:border-red-600 transition-colors`}
-      >
-        <Twitter className={iconSize} />
-      </a>
-      <a
-        href={`mailto:${member.socials.email}`}
-        aria-label={`Email ${member.name}`}
-        className={`${size} rounded-full bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-red-600 hover:border-red-600 transition-colors`}
-      >
-        <Mail className={iconSize} />
-      </a>
-    </div>
-  );
-}
-
-function FeaturedCard({ member, index }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.6, delay: 0.05 }}
-      className="group relative lg:col-span-2 lg:row-span-2 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 rounded-[2rem] overflow-hidden shadow-2xl border border-slate-700/50 hover:border-red-500/40 transition-all duration-500 hover:-translate-y-1"
-    >
-      {/* Ambient glow */}
-      <div className="absolute top-0 right-0 w-72 h-72 bg-red-600/20 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-rose-500/10 rounded-full blur-[90px] pointer-events-none" />
-
-      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-0 h-full">
-        {/* Image side */}
-        <div className="relative h-72 sm:h-full min-h-[320px] overflow-hidden">
-          <Image
-            src={member.image}
-            alt={member.name}
-            fill
-            quality={100}
-            unoptimized
-            className="object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-slate-900/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent sm:from-transparent" />
-
-          {/* Featured badge */}
-          <div className="absolute top-5 left-5 inline-flex items-center gap-1.5 bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider rounded-full px-3 py-1.5 shadow-lg shadow-red-600/30">
-            <Sparkles className="w-3 h-3" />
-            Founder
-          </div>
-        </div>
-
-        {/* Content side */}
-        <div className="p-8 sm:p-10 flex flex-col justify-center gap-5">
-          <Quote className="w-10 h-10 text-red-500/40" />
-          <div>
-            <h3 className="text-3xl font-black text-white mb-2">{member.name}</h3>
-            <p className="text-sm font-bold text-red-400 uppercase tracking-wider mb-4">{member.role}</p>
-            <p className="text-slate-300 leading-relaxed text-base">{member.bio}</p>
-          </div>
-
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2">
-            {member.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-[11px] font-bold uppercase tracking-wider text-red-300 bg-red-500/10 border border-red-500/20 rounded-full px-3 py-1"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          {/* Social */}
-          <div className="pt-2">
-            <SocialButtons member={member} variant="lg" />
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom accent */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 to-rose-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-    </motion.div>
-  );
-}
-
-function TeamCard({ member, index }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.5, delay: (index % 3) * 0.08 }}
-      className="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-red-600/10 border border-slate-200/80 hover:border-red-200 transition-all duration-500 hover:-translate-y-2"
-    >
-      {/* Image with overlay */}
-      <div className="relative h-64 overflow-hidden">
-        <Image
-          src={member.image}
-          alt={member.name}
-          fill
-          quality={100}
-          unoptimized
-          className="object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent" />
-
-        {/* Tags */}
-        <div className="absolute top-4 left-4 flex flex-wrap gap-1.5">
-          {member.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-[10px] font-bold uppercase tracking-wider text-white bg-white/15 backdrop-blur-md border border-white/20 rounded-full px-2.5 py-1"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {/* Social icons - slide up on hover */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400">
-          <SocialButtons member={member} variant="sm" />
-        </div>
-      </div>
-
-      {/* Info */}
-      <div className="p-6 text-center">
-        <h3 className="text-lg font-black text-slate-900 mb-1">{member.name}</h3>
-        <p className="text-sm font-bold text-red-600 mb-3">{member.role}</p>
-        <p className="text-slate-500 text-sm leading-relaxed">{member.bio}</p>
-      </div>
-
-      {/* Bottom accent */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 to-rose-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-    </motion.div>
-  );
-}
 
 export default function Team() {
-  const featured = team.find((m) => m.featured);
-  const rest = team.filter((m) => !m.featured);
-
   return (
-    <section className="py-24 bg-slate-50 relative overflow-hidden">
-      {/* Ambient background */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-gradient-to-b from-red-50/80 to-transparent rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f030_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f030_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_50%,transparent_100%)] pointer-events-none" />
+    <section className="py-24 bg-white text-slate-900 relative overflow-hidden">
+      {/* Background Soft Ambient Light */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-500/5 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-red-50 border border-red-100 rounded-full px-4 py-1.5 mb-5 shadow-sm"
-          >
-            <Users className="w-4 h-4 text-red-600" />
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-red-600">Meet The Experts</span>
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.08 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]"
-          >
-            Our{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-rose-500 to-red-500">
-              Team
-            </span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: 0.14 }}
-            className="text-slate-500 text-base sm:text-lg leading-relaxed mt-4"
-          >
-            A world-class group of investment professionals, strategists, and advisors dedicated to accelerating your capital growth.
-          </motion.p>
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+        
+        {/* Minimal Header */}
+        <div className="text-center max-w-2xl mx-auto mb-20">
+          <p className="text-base font-bold font-mono tracking-[0.3em] text-red-600 uppercase mb-3">
+            Leadership
+          </p>
+          <h2 className="text-4xl sm:text-5xl font-light tracking-tight text-slate-900">
+            Meet Our <span className="font-semibold text-slate-900">Team</span>
+          </h2>
         </div>
 
-        {/* Stats band */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16"
-        >
-          {stats.map((s, i) => {
-            const Icon = s.icon;
-            return (
-              <div
-                key={i}
-                className="flex items-center gap-4 p-5 bg-white border border-slate-200/80 rounded-2xl shadow-sm hover:shadow-lg hover:shadow-red-600/5 hover:border-red-200 transition-all duration-300"
-              >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-rose-700 flex items-center justify-center shadow-lg shadow-red-600/20 flex-shrink-0">
-                  <Icon className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <div className="text-2xl font-black text-slate-900 leading-none">{s.value}</div>
-                  <div className="text-xs font-semibold text-slate-500 mt-1">{s.label}</div>
+        {/* Circular Image Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          {team.map((member, index) => (
+            <motion.div
+              key={member.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group flex flex-col items-center text-center"
+            >
+              {/* Circular Avatar Container with Gradient Glow Ring */}
+              <div className="relative w-48 h-48 sm:w-52 sm:h-52 mb-6">
+                {/* Glow ring on hover */}
+                <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-red-600 to-rose-500 opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
+                
+                {/* Border ring */}
+                <div className="relative w-full h-full rounded-full p-1 bg-slate-50 border border-slate-200 group-hover:border-transparent transition-colors duration-500 shadow-sm">
+                  <div className="relative w-full h-full rounded-full overflow-hidden bg-slate-100">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      unoptimized
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </div>
                 </div>
               </div>
-            );
-          })}
-        </motion.div>
 
-        {/* Featured + grid layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
-          <FeaturedCard member={featured} index={0} />
-          {rest.map((member, i) => (
-            <TeamCard key={i} member={member} index={i + 1} />
+              {/* Minimal Meta */}
+              <h3 className="text-lg font-medium text-slate-900 group-hover:text-red-600 transition-colors duration-300">
+                {member.name}
+              </h3>
+              <p className="text-xs font-mono tracking-wider text-slate-500 uppercase mt-1">
+                {member.role}
+              </p>
+            </motion.div>
           ))}
         </div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5 }}
-          className="mt-16"
-        >
-          <div className="relative bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 rounded-3xl px-8 py-10 sm:px-12 sm:py-12 overflow-hidden border border-slate-700/50">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-red-600/20 rounded-full blur-[100px] pointer-events-none" />
-            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div>
-                <h3 className="text-2xl font-black text-white mb-2">Want to join our team?</h3>
-                <p className="text-slate-400 text-sm sm:text-base">We&apos;re always looking for exceptional talent to drive the future of investment.</p>
-              </div>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-sm px-7 py-3.5 rounded-xl shadow-lg shadow-red-600/30 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
-              >
-                Get in Touch
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        </motion.div>
+        {/* Sleek CTA Line */}
+        <div className="mt-20 pt-8 border-t border-slate-100 flex items-center justify-between text-sm">
+          <span className="text-slate-500 font-light">Interested in working with us?</span>
+          <Link 
+            href="/contact" 
+            className="group inline-flex items-center gap-2 font-medium text-slate-900 hover:text-red-600 transition-colors"
+          >
+            Get in touch
+            <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-red-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+          </Link>
+        </div>
+
       </div>
     </section>
   );
 }
-
-
-export default Team
