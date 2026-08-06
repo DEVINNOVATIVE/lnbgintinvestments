@@ -19,7 +19,7 @@ export default function ServiceDetailSidebar({ activeSlug }) {
           <div className="flex items-center gap-3">
             <Phone className="w-4 h-4 text-red-400 flex-shrink-0" />
             <a href="tel:+447867447127" className="text-slate-300 text-sm hover:text-white transition-colors">
-              +44-7867-447527
+              +1 818 575 0663
             </a>
           </div>
           <div className="flex items-center gap-3">
