@@ -11,14 +11,14 @@ import { ArrowRight, ChevronDown, ShieldCheck, TrendingUp, Globe as Globe2, Star
 
 const slides = [
   {
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop',
-    eyebrow: 'LNBG International Investment',
+    image: '/assets/hero1.avif',
+    eyebrow: 'LNBG International Investments',
     title: 'Capital that moves',
     highlight: 'markets forward',
     desc: 'Tailored investment strategies, asset management and research built to accelerate your corporate vision.',
   },
   {
-    image: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=2070&auto=format&fit=crop',
+    image: '/assets/hero2.avif',
     eyebrow: 'Improve Your Business',
     title: 'We help you',
     highlight: 'grow faster',

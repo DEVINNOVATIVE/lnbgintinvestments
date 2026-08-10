@@ -24,7 +24,7 @@ export default function ServicesBento() {
               <span className="text-xs font-bold uppercase tracking-widest text-red-600">What We Offer</span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-              Investment solutions for{' '}
+              Investments solutions for{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-rose-500">every horizon</span>
             </h2>
           </motion.div>

@@ -442,7 +442,7 @@ export default function Services() {
                   {/* Card Footer CTA */}
                   <div className="px-5 sm:px-6 pb-5 pt-3 border-t border-slate-100 flex items-center justify-between mt-auto">
                     <span className="text-[11px] font-medium text-slate-400">
-                      {service.date || 'LNBG Investment'}
+                      {service.date || 'LNBG Investments'}
                     </span>
                     <span className="inline-flex items-center gap-1.5 text-red-600 text-xs font-bold group-hover:gap-2.5 transition-all">
                       <span>Explore</span>

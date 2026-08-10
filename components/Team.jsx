@@ -7,8 +7,8 @@ import { ArrowUpRight } from 'lucide-react';
 
 const team = [
   {
-    name: 'Lord Neil Gibson',
-    role: 'CEO & Founder',
+    name: 'Neil B Gibson',
+    role: 'CEO/ Founder',
     image: '/assets/ceo.jpeg',
   },
   {
@@ -17,8 +17,8 @@ const team = [
     image: '/assets/rashed-1.png',
   },
   {
-    name: 'Linda Heath',
-    role: 'Financial Advisor',
+    name: 'Ladd Tanner',
+    role: 'Vice President',
     image: '/assets/linda-heath.png',
   },
   {

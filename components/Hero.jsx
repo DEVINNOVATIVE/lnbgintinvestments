@@ -248,7 +248,7 @@ export default function MinimalInteractiveHero() {
           >
             <Sparkles className="w-3.5 h-3.5 text-red-400" />
             <span className="text-slate-200 text-xs font-semibold tracking-wide">
-              LNBG International Investment
+              LNBG International Investments
             </span>
           </motion.div>
 
