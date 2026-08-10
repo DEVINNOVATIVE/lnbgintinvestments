@@ -18,7 +18,7 @@ const team = [
   },
   {
     name: 'Ladd Tanner',
-    role: 'Vice President',
+    role: 'President',
     image: '/assets/linda-heath.png',
   },
   {
