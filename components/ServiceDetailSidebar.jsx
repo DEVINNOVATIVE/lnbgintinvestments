@@ -13,7 +13,7 @@ export default function ServiceDetailSidebar({ activeSlug }) {
           <div className="flex items-start gap-3">
             <MapPin className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
             <p className="text-slate-300 text-sm leading-relaxed">
-              Arawak chamber Mandar house 3rd floor johsons ghut tortola (VI), VG1 1050
+              Jessups, Jessups Estate, P.O. Box 590, Nevis St Kitts.
             </p>
           </div>
           <div className="flex items-center gap-3">

@@ -47,7 +47,7 @@ export default function Contact() {
   };
 
   const contactInfo = [
-    { icon: MapPin, title: 'Our Office', value: 'Arawak chamber Mandar house 3rd floor johsons ghut tortola Tortola Central, VG1110, British Virgin Islands' },
+    { icon: MapPin, title: 'Our Office', value: 'Jessups, Jessups Estate, P.O. Box 590, Nevis St Kitts.' },
     { icon: Mail, title: 'Email Us', value: 'lnbg@lnbgllc.com' },
     { icon: Phone, title: 'Call Us', value: '+1 818 575 0663' },
     { icon: Clock, title: 'Office Hours', value: 'Sat - Wed: 8:00  - 4:00' },

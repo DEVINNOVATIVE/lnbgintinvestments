@@ -129,7 +129,7 @@ export default function Footer() {
                   <MapPin className="w-5 h-5 text-red-500 group-hover:text-white transition-colors duration-300" />
                 </div>
                 <p className="text-slate-400 leading-relaxed font-normal pt-1">
-                  Arawak chamber Mandar house 3rd floor johsons ghut tortola Tortola Central, VG1110, British Virgin Islands
+                  Jessups, Jessups Estate, P.O. Box 590, Nevis St Kitts.
                 </p>
               </div>
 
