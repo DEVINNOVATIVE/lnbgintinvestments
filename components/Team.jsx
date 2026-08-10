@@ -9,7 +9,7 @@ const team = [
   {
     name: 'Lord Neil Gibson',
     role: 'CEO & Founder',
-    image: '/assets/ceo.png',
+    image: '/assets/ceo.jpeg',
   },
   {
     name: 'Rached Arfaoui',
@@ -19,7 +19,7 @@ const team = [
   {
     name: 'Linda Heath',
     role: 'Financial Advisor',
-    image: '/assets/linda-heath-2.png',
+    image: '/assets/linda-heath.png',
   },
   {
     name: 'Habib Rehman',

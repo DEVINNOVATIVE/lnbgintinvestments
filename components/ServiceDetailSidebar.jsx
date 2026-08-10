@@ -24,8 +24,8 @@ export default function ServiceDetailSidebar({ activeSlug }) {
           </div>
           <div className="flex items-center gap-3">
             <Mail className="w-4 h-4 text-red-400 flex-shrink-0" />
-            <a href="mailto:lnbig@lnbig.com" className="text-slate-300 text-sm hover:text-white transition-colors">
-              lnbig@lnbig.com
+            <a href="mailto:LNBG@LNBGLLC.COM" className="text-slate-300 text-sm hover:text-white transition-colors">
+              LNBG@LNBGLLC.COM
             </a>
           </div>
         </div>
